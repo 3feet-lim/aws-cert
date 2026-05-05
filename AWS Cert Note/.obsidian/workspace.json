@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "initial commit test.md",
+                "file": "Service/Network/AWS VPC.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "initial commit test"
+              "title": "AWS VPC"
             }
           }
         ],
@@ -109,7 +109,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "initial commit test.md",
+                "file": "Service/Network/AWS VPC.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +119,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "initial commit test 의 백링크"
+              "title": "AWS VPC 의 백링크"
             }
           },
           {
@@ -128,12 +128,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "initial commit test.md",
+                "file": "Service/Network/AWS VPC.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "initial commit test 의 나가는 링크"
+              "title": "AWS VPC 의 나가는 링크"
             }
           },
           {
@@ -171,13 +171,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "initial commit test.md",
+                "file": "Service/Network/AWS VPC.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "initial commit test 의 개요"
+              "title": "AWS VPC 의 개요"
             }
           },
           {
@@ -209,9 +209,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "eeb51faf7eb811be",
+  "active": "6ea7316f008e7c2e",
   "lastOpenFiles": [
+    "Service/AWS VPC.md",
+    "Service/Network/AWS VPC.md",
+    "Service/Network",
+    "무제",
     "initial commit test.md",
+    "Error Log",
+    "Service",
     "환영합니다!.md"
   ]
 }
