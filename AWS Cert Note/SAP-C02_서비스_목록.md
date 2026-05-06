@@ -4,44 +4,6 @@
 > 카테고리는 시험 빈출도 기준으로 정렬
 
 
----
-
-## 2. 🔐 Security, Identity & Compliance
-
-### 자격증명·권한
-- AWS IAM
-- AWS IAM Identity Center
-- AWS STS
-- Amazon Cognito
-- AWS Directory Service
-
-### 멀티 어카운트·리소스 공유
-- AWS Organizations
-- AWS Control Tower
-- AWS RAM
-
-### 키·인증서·비밀
-- AWS KMS
-- AWS CloudHSM
-- AWS Certificate Manager (ACM)
-- AWS Secrets Manager
-
-### 위협 탐지·조사
-- Amazon GuardDuty
-- Amazon Inspector
-- Amazon Detective
-- Amazon Macie
-- AWS Security Hub
-
-### 네트워크·웹 방어
-- AWS Shield
-- AWS WAF
-- AWS Network Firewall
-- AWS Firewall Manager
-
-### 감사·컴플라이언스
-- AWS Audit Manager
-- AWS Artifact
 
 ---
 
