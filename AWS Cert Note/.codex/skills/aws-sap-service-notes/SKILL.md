@@ -79,12 +79,16 @@ Use a draw.io-style linear architecture only when service relationships, traffic
 
 - Prefer box-and-arrow diagrams.
 - Use left-to-right flow unless a hub-and-spoke or layered layout is clearer.
+- Use a clean sans-serif font; avoid pixel/bitmap-looking fonts.
+- Route arrows orthogonally and leave whitespace so lines do not cross labels or run through boxes.
+- Keep label count low: service name, boundary, route decision, and exam trap only.
 - Use light backgrounds and minimal colors:
   - blue: AWS managed service/control plane
   - green: private VPC/subnet/data path
   - orange: internet/edge/external user
   - red: risk, failure, or exam trap callout
 - Include only labels that help exam recall: HA boundary, Region/AZ/account boundary, trust boundary, routing path, replication path, or migration flow.
+- Before finishing, visually inspect the PNG for overlapping arrows, clipped text, unreadable labels, and excessive detail.
 
 ### Non-architecture visual style
 
