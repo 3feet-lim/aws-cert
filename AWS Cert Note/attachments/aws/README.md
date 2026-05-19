@@ -4,30 +4,28 @@
 
 ## 기본 원칙
 
-- 그림 원본은 **draw.io / diagrams.net** 형식으로 보관합니다.
-- 노트에는 draw.io에서 export한 PNG를 임베드합니다.
+- 그림은 **PNG**로 보관합니다. Obsidian에서 바로 보이게 하는 것이 우선입니다.
+- draw.io 스타일은 “파일 형식”이 아니라 “박스·화살표 기반의 선형 아키텍처 스타일”을 뜻합니다.
+- `.drawio` 원본은 기본 산출물이 아닙니다. 필요할 때만 별도로 만들고, 노트에는 항상 PNG를 임베드합니다.
 - 모든 서비스에 그림을 강제하지 않습니다. 트래픽 흐름, 신뢰 경계, HA/DR, 마이그레이션, 연동 구조가 시험 이해에 도움이 될 때만 추가합니다.
+- 아키텍처가 필요 없는 서비스는 비교표, 결정트리, 정책 평가 흐름, 라이프사이클 등 개념 정리에 도움이 되는 PNG를 사용합니다.
 
 권장 파일명:
 
 ```text
-서비스명-architecture.drawio
 서비스명-architecture.png
-서비스명-flow.drawio
 서비스명-flow.png
-서비스명-comparison.drawio
 서비스명-comparison.png
+서비스명-decision-tree.png
 ```
 
 예시:
 
 ```text
-amazon-vpc-architecture.drawio
 amazon-vpc-architecture.png
-aws-iam-policy-flow.drawio
 aws-iam-policy-flow.png
-amazon-s3-storage-class-comparison.drawio
 amazon-s3-storage-class-comparison.png
+amazon-ecs-vs-eks-decision-tree.png
 ```
 
 노트에서는 다음처럼 링크합니다:

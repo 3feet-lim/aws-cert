@@ -110,11 +110,11 @@ updated: 2026-05-19
 
 ## 6. 아키텍처 / 그림
 
-> [!note] draw.io 원본
-> `attachments/aws/amazon-vpc-architecture.drawio` 파일에 SAP-C02용 기본 VPC 구조를 draw.io 형식으로 저장했다.
-> PNG export 도구가 있는 환경에서는 `attachments/aws/amazon-vpc-architecture.png`로 내보낸 뒤 아래 링크를 활성화한다.
+> [!note] PNG 그림
+> `attachments/aws/amazon-vpc-architecture.png` 파일을 바로 Obsidian에서 볼 수 있게 추가했다.
+> 스타일은 draw.io처럼 박스·화살표 중심의 선형 아키텍처로 유지한다.
 
-<!-- PNG export 후 사용: ![[attachments/aws/amazon-vpc-architecture.png]] -->
+![[attachments/aws/amazon-vpc-architecture.png]]
 
 그림은 다음 요소만 포함한다.
 

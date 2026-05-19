@@ -93,9 +93,9 @@ updated: {{date}}
 ### 아키텍처 / 동작 흐름
 
 > [!note] 그림 작성 규칙
-> 원본은 draw.io diagrams.net 형식인 `attachments/aws/{{서비스명}}-architecture.drawio`로 보관하고,
-> 노트에는 export한 PNG `attachments/aws/{{서비스명}}-architecture.png`를 임베드한다.
-> AWS 공식 아이콘, 좌→우 흐름, 연한 색상, 시험 포인트 콜아웃 중심으로 단순하게 그린다.
+> 노트에서 바로 보이도록 PNG `attachments/aws/{{서비스명}}-architecture.png`를 임베드한다.
+> 아키텍처가 중요한 서비스는 draw.io처럼 박스·화살표 중심의 선형 구조로 그리고,
+> 아키텍처가 덜 중요한 서비스는 비교표/결정트리/흐름도 같은 개념 이해용 PNG를 사용한다.
 
 ![[attachments/aws/{{서비스명}}-architecture.png]]
 

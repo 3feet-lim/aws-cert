@@ -59,28 +59,44 @@ For each service, first classify the service type, then select only the sections
 
 - `언제 사용하는가`: useful for substitutable services such as ECS vs EKS, SQS vs SNS/EventBridge, EFS vs FSx, Direct Connect vs VPN. For foundational services like VPC, convert it to `설계 시 고려사항` or omit.
 - `언제 사용하지 않는가`: useful when common distractors exist. Omit or merge into comparison for broad foundation services.
-- `아키텍처 그림`: use only when a diagram clarifies traffic flow, trust boundary, HA/DR, or integration. Do not require images for every service. When adding one, keep a draw.io source file and export a PNG for Obsidian embedding.
+- `아키텍처 그림`: use only when a diagram clarifies traffic flow, trust boundary, HA/DR, or integration. Do not require images for every service. When adding one, create a PNG that is directly visible in Obsidian.
 - `동작 흐름`: use for event-driven, pipeline, auth, migration, deployment, or data-flow services. Omit for static resource concepts.
 - `DR 전략`: use for stateful, regional, backup, migration, database, storage, or workload continuity topics. Omit for services where DR is not an exam decision.
 - `비용 포인트`: keep when pricing changes architecture choices. Otherwise one short bullet is enough.
 
 ## Diagram convention
 
-Use draw.io / diagrams.net as the source format for service diagrams.
+Create diagrams as **PNG files** so they are directly visible in Obsidian.
 
-- Source file: `attachments/aws/{{service-slug}}-architecture.drawio`
-- Embedded export: `attachments/aws/{{service-slug}}-architecture.png`
-- Link from notes with Obsidian image syntax: `![[attachments/aws/{{service-slug}}-architecture.png]]`
+- Output file: `attachments/aws/{{service-slug}}-architecture.png`, `{{service-slug}}-flow.png`, or `{{service-slug}}-comparison.png`.
+- Link from notes with Obsidian image syntax: `![[attachments/aws/{{service-slug}}-architecture.png]]`.
+- Do not create `.drawio` files by default. The desired look is draw.io-like, but the artifact should be PNG.
 - Keep diagrams SAP-C02-oriented, not product-architecture exhaustive.
-- Prefer AWS official icon shapes when available.
-- Use left-to-right flow unless a hub-and-spoke or layered architecture is clearer.
+
+### Architecture diagram style
+
+Use a draw.io-style linear architecture only when service relationships, traffic flow, trust boundaries, HA/DR, hybrid connectivity, or migration paths matter.
+
+- Prefer box-and-arrow diagrams.
+- Use left-to-right flow unless a hub-and-spoke or layered layout is clearer.
 - Use light backgrounds and minimal colors:
   - blue: AWS managed service/control plane
   - green: private VPC/subnet/data path
   - orange: internet/edge/external user
   - red: risk, failure, or exam trap callout
 - Include only labels that help exam recall: HA boundary, Region/AZ/account boundary, trust boundary, routing path, replication path, or migration flow.
-- Do not create a diagram just to satisfy the template.
+
+### Non-architecture visual style
+
+If a service does not need architecture, still add a helpful PNG when visual memory helps:
+
+- comparison table image for similar services
+- decision tree for choosing between services
+- policy/evaluation flow for IAM-like services
+- lifecycle/state diagram for storage, deployment, or migration services
+- responsibility split diagram for managed vs user-managed parts
+
+Skip diagrams entirely when a normal markdown table is clearer.
 
 ## Service-specific adaptation examples
 
