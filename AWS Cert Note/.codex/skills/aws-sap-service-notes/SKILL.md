@@ -68,10 +68,13 @@ For each service, first classify the service type, then select only the sections
 
 Create diagrams as **PNG files** so they are directly visible in Obsidian.
 
+- When generating or revising AWS diagrams, follow the project skill `aws-exam-diagram-style-system`.
+- Prefer the latest OpenAI image generation model for the final PNG when available; currently use `gpt-image-2` per official OpenAI image generation docs.
 - Output file: `attachments/aws/{{service-slug}}-architecture.png`, `{{service-slug}}-flow.png`, or `{{service-slug}}-comparison.png`.
 - Link from notes with Obsidian image syntax: `![[attachments/aws/{{service-slug}}-architecture.png]]`.
 - Do not create `.drawio` files by default. The desired look is draw.io-like, but the artifact should be PNG.
 - Keep diagrams SAP-C02-oriented, not product-architecture exhaustive.
+- Diagrams should be Korean-first, but natural AWS/service/technical terms may remain in English when clearer.
 
 ### Architecture diagram style
 
