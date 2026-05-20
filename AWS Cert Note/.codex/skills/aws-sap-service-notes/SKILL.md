@@ -1,6 +1,6 @@
 ---
 name: aws-sap-service-notes
-description: Use when creating or revising AWS service concept notes for SAP-C02 exam prep. Apply the repository service template flexibly: choose, merge, rename, or omit sections based on each service's exam-relevant characteristics instead of forcing every heading.
+description: "Use when creating or revising AWS service concept notes for SAP-C02 exam prep. Apply the repository service template flexibly: choose, merge, rename, or omit sections based on each service's exam-relevant characteristics instead of forcing every heading."
 ---
 
 # AWS SAP Service Notes
