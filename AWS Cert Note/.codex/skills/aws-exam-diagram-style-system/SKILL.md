@@ -21,7 +21,7 @@ Artistic styling is not the priority. The final artifact should be a **PNG** sui
 
 ## Generation model
 
-Use an image generation model for the final PNG whenever this environment provides one.
+The final PNG **must be produced by an image generation model**. Do not create final diagram PNGs with deterministic local fallbacks such as Python drawing scripts, SVG/HTML-to-PNG renderers, canvas, Mermaid screenshots, or manually composed bitmap placeholders.
 
 - Default to the latest OpenAI image generation model, currently `gpt-image-2`.
 - Prefer high quality for final diagrams.
@@ -36,7 +36,7 @@ Use an image generation model for the final PNG whenever this environment provid
   - Korean-first explanatory text with natural AWS/technical English allowed
 - After generation, visually inspect the PNG. If text is unreadable, connectors overlap, or AWS placement rules are wrong, regenerate or revise.
 
-If image generation is unavailable, use a deterministic fallback such as SVG/HTML-to-PNG or a local drawing script, but treat that as a fallback rather than the preferred path.
+If image generation is unavailable, stop and report the blocker. Do **not** substitute deterministic fallback images for final note assets. Temporary sketches or prompt-planning diagrams may be used only as internal planning artifacts and must not be linked from notes or saved as final `attachments/aws/*.png` outputs.
 
 ## Language rule
 
