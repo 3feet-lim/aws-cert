@@ -1,26 +1,31 @@
 ---
 name: aws-sap-service-notes
-description: Use when creating or revising AWS service concept notes for SAP-C02 exam prep. Apply the repository service template flexibly: choose, merge, rename, or omit sections based on each service's exam-relevant characteristics instead of forcing every heading.
+description: Create or revise Korean AWS service concept notes for SAP-C02 study from this repository's Templates/AWS Service Template.md and existing Service/ examples. Use when asked to generate AWS service notes, concept summaries, exam-focused service pages, or Obsidian study notes; invoke aws-exam-diagram-style-system for any needed architecture/concept PNG diagrams.
 ---
 
 # AWS SAP Service Notes
 
 ## Purpose
 
-Create SAP-C02-focused AWS service notes under `Service/` by using `Templates/AWS Service Template.md` as a flexible checklist, not a rigid form.
+Create SAP-C02-focused AWS service concept notes under `Service/` by using `Templates/AWS Service Template.md` and nearby existing notes as the source structure. The template is a **flexible checklist**, not a rigid form.
 
-The output should help answer exam questions: **when to choose the service, what tradeoffs matter, what similar services are distractors, and which architecture constraints change the answer.**
+The note should help answer exam questions: **when to choose the service, what tradeoffs matter, what similar services are distractors, and which architecture constraints change the answer.**
 
-## Core rule
+## Required companion skill for images
 
-Do not force every template section into every service note.
+When a note needs a new or revised image, use the project skill `aws-exam-diagram-style-system`.
 
-For each service, first classify the service type, then select only the sections that improve exam understanding. Rename or merge headings when that makes the note clearer.
+- Load `.codex/skills/aws-exam-diagram-style-system/SKILL.md` before creating the image prompt.
+- Produce a PNG suitable for Obsidian embedding.
+- Save images under `attachments/aws/`.
+- Link images with Obsidian syntax: `![[attachments/aws/{{service-slug}}-architecture.png]]`, `![[attachments/aws/{{service-slug}}-flow.png]]`, or `![[attachments/aws/{{service-slug}}-comparison.png]]`.
+- Do not create `.drawio` files by default. The desired look is draw.io-like, but the artifact should be PNG.
 
 ## Workflow
 
-1. Read `Templates/AWS Service Template.md` and the target service file.
-2. Identify the service's SAP-C02 role:
+1. Read `Templates/AWS Service Template.md`.
+2. Read 1-3 nearby completed notes in the same `Service/<category>/` folder when available to match tone, heading depth, frontmatter, and link style.
+3. Identify the service's SAP-C02 role:
    - networking foundation
    - security/governance control
    - compute/runtime platform
@@ -30,19 +35,38 @@ For each service, first classify the service type, then select only the sections
    - observability/operations tool
    - cost/optimization tool
    - edge/global service
-3. Build the note around exam decisions, not product documentation.
-4. Keep required sections minimal:
+4. Build the note around exam decisions, not product documentation.
+5. Keep required sections minimal:
    - 한 줄 요약
    - SAP-C02 시험 포커스
    - 핵심 개념
    - 주요 기능과 시험 포인트
-   - 비교/선택 기준
-   - 헷갈리는 포인트 또는 오답 함정
+   - 비교/선택 기준 or service-specific decision section
+   - 헷갈리는 포인트 or 오답 함정
    - 암기 문장
    - 참고 링크
-5. Add optional sections only when relevant.
-6. Prefer concise tables and decision rules over long descriptions.
-7. Verify important claims against AWS official docs when the service behavior could be version-sensitive or easy to misstate.
+6. Add optional sections only when they improve exam understanding.
+7. Prefer concise tables and decision rules over long product descriptions.
+8. Verify important or version-sensitive claims against AWS official docs.
+
+## File and metadata conventions
+
+- Place the note in the appropriate `Service/<category>/` folder.
+- Preserve the repository's numbering/category convention when present, for example `01-Network/1-6 Amazon Route 53.md`.
+- Use Korean-first prose while keeping official AWS service names and natural exam terms in English.
+- Use YAML frontmatter compatible with `Templates/AWS Service Template.md`:
+  - `type: aws-service`
+  - `service_name`
+  - `category`
+  - `exam: SAP-C02`
+  - `exam_domains`
+  - `status`
+  - `priority`
+  - `aliases`
+  - `tags`
+  - `created` / `updated`
+- Use the current local date for `created` and `updated` unless revising an existing note; then preserve `created` and update `updated`.
+- Use `[[Service Name]]` wiki links for related services.
 
 ## Section selection guide
 
@@ -51,76 +75,53 @@ For each service, first classify the service type, then select only the sections
 - SAP-C02 시험 포커스
 - 핵심 개념
 - 주요 기능과 시험 포인트
-- 다른 서비스와 비교
-- 헷갈리는 포인트
+- 다른 서비스와 비교 / 선택 기준
+- 헷갈리는 포인트 / 오답 함정
+- SAP-C02 시나리오 패턴 when the service is often a scenario answer
 - 암기 문장
+- 참고 링크
 
 ### Use only when meaningful
 
-- `언제 사용하는가`: useful for substitutable services such as ECS vs EKS, SQS vs SNS/EventBridge, EFS vs FSx, Direct Connect vs VPN. For foundational services like VPC, convert it to `설계 시 고려사항` or omit.
+- `언제 사용하는가`: useful for substitutable services such as ECS vs EKS, SQS vs SNS/EventBridge, EFS vs FSx, Direct Connect vs VPN.
 - `언제 사용하지 않는가`: useful when common distractors exist. Omit or merge into comparison for broad foundation services.
-- `아키텍처 그림`: use only when a diagram clarifies traffic flow, trust boundary, HA/DR, or integration. Do not require images for every service. When adding one, create a PNG that is directly visible in Obsidian.
-- `동작 흐름`: use for event-driven, pipeline, auth, migration, deployment, or data-flow services. Omit for static resource concepts.
-- `DR 전략`: use for stateful, regional, backup, migration, database, storage, or workload continuity topics. Omit for services where DR is not an exam decision.
-- `비용 포인트`: keep when pricing changes architecture choices. Otherwise one short bullet is enough.
+- `아키텍처 / 동작 흐름`: use when a diagram clarifies traffic flow, trust boundary, HA/DR, integration, deployment, policy evaluation, lifecycle, or migration path.
+- `보안 / 거버넌스`: keep for identity, network, encryption, audit, compliance, or org-control services.
+- `가용성 / 확장성 / 복원력`: keep for stateful, multi-AZ, DR, backup, replication, routing, storage, database, or workload-continuity topics.
+- `비용 / 운영 포인트`: keep when pricing or operational burden changes architecture choices. Otherwise one short bullet is enough.
 
-## Diagram convention
+## Diagram decision rules
 
-Create diagrams as **PNG files** so they are directly visible in Obsidian.
+Create a diagram only when visual memory or spatial relationships help more than a Markdown table.
 
-- When generating or revising AWS diagrams, follow the project skill `aws-exam-diagram-style-system`.
-- Prefer the latest OpenAI image generation model for the final PNG when available; currently use `gpt-image-2` per official OpenAI image generation docs.
-- Output file: `attachments/aws/{{service-slug}}-architecture.png`, `{{service-slug}}-flow.png`, or `{{service-slug}}-comparison.png`.
-- Link from notes with Obsidian image syntax: `![[attachments/aws/{{service-slug}}-architecture.png]]`.
-- Do not create `.drawio` files by default. The desired look is draw.io-like, but the artifact should be PNG.
-- Keep diagrams SAP-C02-oriented, not product-architecture exhaustive.
-- Diagrams should be Korean-first, but natural AWS/service/technical terms may remain in English when clearer.
+Use `aws-exam-diagram-style-system` to create:
 
-### Architecture diagram style
+- architecture flow diagrams for VPC, hybrid, edge, app, migration, or data path services
+- policy/evaluation flows for IAM-like services
+- lifecycle/state diagrams for storage, deployment, migration, and backup services
+- decision trees for choosing between similar services
+- comparison visuals when exam distractors are hard to remember
 
-Use a draw.io-style linear architecture only when service relationships, traffic flow, trust boundaries, HA/DR, hybrid connectivity, or migration paths matter.
-
-- Prefer box-and-arrow diagrams.
-- Use left-to-right flow unless a hub-and-spoke or layered layout is clearer.
-- Use a clean sans-serif font; avoid pixel/bitmap-looking fonts.
-- Route arrows orthogonally and leave whitespace so lines do not cross labels or run through boxes.
-- Keep label count low: service name, boundary, route decision, and exam trap only.
-- Use light backgrounds and minimal colors:
-  - blue: AWS managed service/control plane
-  - green: private VPC/subnet/data path
-  - orange: internet/edge/external user
-  - red: risk, failure, or exam trap callout
-- Include only labels that help exam recall: HA boundary, Region/AZ/account boundary, trust boundary, routing path, replication path, or migration flow.
-- Before finishing, visually inspect the PNG for overlapping arrows, clipped text, unreadable labels, and excessive detail.
-
-### Non-architecture visual style
-
-If a service does not need architecture, still add a helpful PNG when visual memory helps:
-
-- comparison table image for similar services
-- decision tree for choosing between services
-- policy/evaluation flow for IAM-like services
-- lifecycle/state diagram for storage, deployment, or migration services
-- responsibility split diagram for managed vs user-managed parts
-
-Skip diagrams entirely when a normal markdown table is clearer.
+Skip diagrams when the same concept is clearer as a concise table.
 
 ## Service-specific adaptation examples
 
 - **Amazon VPC**: Replace `언제 사용하는가/사용하지 않는가` with `설계 시 고려사항`, `연결 옵션`, `보안 경계`, `라우팅/엔드포인트`, and `하이브리드/멀티계정 패턴`.
-- **AWS IAM**: Emphasize policy evaluation, identity vs resource policies, cross-account access, federation, permission boundaries, SCP interaction, and least privilege. Architecture diagram is optional.
+- **AWS IAM**: Emphasize policy evaluation, identity vs resource policies, cross-account access, federation, permission boundaries, SCP interaction, and least privilege. A policy-evaluation flow image can help.
 - **Amazon S3**: Keep storage class comparison, lifecycle, replication, encryption, access control, consistency, event integration, and DR/cost tradeoffs.
 - **Amazon ECS/EKS**: Keep `언제 사용하는가/사용하지 않는가`, runtime model comparison, networking, scaling, deployment, operations burden, and cost.
 - **AWS DMS / Migration Hub**: Focus on source/target constraints, migration patterns, downtime, replication, validation, and cutover.
 - **CloudWatch / CloudTrail / Config**: Focus on observability vs audit vs compliance differences and exam distractors.
+- **SNS / SQS / EventBridge / Step Functions**: Focus on event fanout, buffering, routing, orchestration, retry/DLQ behavior, ordering, and loose coupling.
 
 ## Style
 
-- Korean notes are preferred.
+- Write in Korean for study explanations.
 - Keep service notes practical for exam review, not exhaustive product manuals.
-- Use `[[Service Name]]` wiki links for related AWS services.
-- If a template placeholder does not fit the service, delete it rather than filling it awkwardly.
-- Mark uncertain details clearly or verify from official AWS docs.
+- Prefer short tables, bullets, and scenario patterns.
+- Delete placeholders that do not fit the service instead of filling them awkwardly.
+- Mark uncertain details clearly or verify them from official AWS docs.
+- Avoid over-generating sections; the final note should feel curated.
 
 ## Completion check
 
@@ -130,3 +131,4 @@ Before finishing a service note, confirm:
 - At least one common wrong-answer trap or comparison is included.
 - Irrelevant template sections were omitted or renamed.
 - Official AWS links are included for high-risk or detail-heavy claims.
+- Any needed PNG is present in `attachments/aws/`, linked with Obsidian syntax, and follows `aws-exam-diagram-style-system`.

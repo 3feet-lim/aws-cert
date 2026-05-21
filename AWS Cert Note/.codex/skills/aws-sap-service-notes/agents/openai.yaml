@@ -1,0 +1,6 @@
+interface:
+  display_name: "AWS SAP Service Notes"
+  short_description: "Create SAP-C02 AWS service concept notes"
+  default_prompt: "Use $aws-sap-service-notes to create a Korean SAP-C02 concept note for an AWS service from the repository template."
+policy:
+  allow_implicit_invocation: true
