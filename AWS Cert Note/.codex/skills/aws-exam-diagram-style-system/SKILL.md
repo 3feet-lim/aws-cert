@@ -21,9 +21,11 @@ Artistic styling is not the priority. The final artifact should be a **PNG** sui
 
 ## Generation model
 
-Use an image generation model for the final PNG whenever this environment provides one.
+The final PNG **must be produced with Codex's built-in `image_gen` tool**. Do not create final diagram PNGs with deterministic local fallbacks such as Python drawing scripts, SVG/HTML-to-PNG renderers, canvas, Mermaid screenshots, or manually composed bitmap placeholders.
 
-- Default to the latest OpenAI image generation model, currently `gpt-image-2`.
+- Use the built-in `image_gen` tool for every final diagram asset.
+- Treat `image_gen` as the model-backed generation path for this project. Do not replace it with local Python/Node drawing, SVG rendering, HTML screenshots, Mermaid export, or other deterministic renderers.
+- Default to the latest OpenAI image generation model exposed by the environment, currently `gpt-image-2` when available through the image generation surface.
 - Prefer high quality for final diagrams.
 - Use a landscape canvas for architecture diagrams unless the service concept is better shown as a vertical flow.
 - The prompt must explicitly request:
@@ -36,7 +38,9 @@ Use an image generation model for the final PNG whenever this environment provid
   - Korean-first explanatory text with natural AWS/technical English allowed
 - After generation, visually inspect the PNG. If text is unreadable, connectors overlap, or AWS placement rules are wrong, regenerate or revise.
 
-If image generation is unavailable, use a deterministic fallback such as SVG/HTML-to-PNG or a local drawing script, but treat that as a fallback rather than the preferred path.
+After `image_gen` creates the image under the default generated-images location, copy the selected output into the repository path referenced by the note, such as `attachments/aws/{{service-slug}}-architecture.png`. Leave the generated original in place unless the user explicitly asks to delete it.
+
+If `image_gen` is unavailable or fails, stop and report the blocker. Do **not** substitute deterministic fallback images for final note assets. Temporary sketches or prompt-planning diagrams may be used only as internal planning artifacts and must not be linked from notes or saved as final `attachments/aws/*.png` outputs.
 
 ## Language rule
 
