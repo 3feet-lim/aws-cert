@@ -1,0 +1,6 @@
+interface:
+  display_name: "AWS Exam Error Log"
+  short_description: "AWS SAP-C02 오답노트와 서비스노트 보강"
+  default_prompt: "Use $aws-exam-error-log to turn this AWS practice question and answer into an Obsidian error log and update missing service notes."
+policy:
+  allow_implicit_invocation: true
