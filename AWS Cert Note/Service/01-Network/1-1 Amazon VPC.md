@@ -18,7 +18,7 @@ tags:
   - sap-c02
   - networking
 created: 2026-05-19
-updated: 2026-05-19
+updated: 2026-06-13
 ---
 
 # Amazon VPC
@@ -58,6 +58,7 @@ updated: 2026-05-19
 | Network ACL | 서브넷 수준 stateless 방화벽 | inbound/outbound와 ephemeral port를 모두 고려해야 한다. 명시적 deny가 가능하다. |
 | VPC Flow Logs | VPC/Subnet/ENI 단위 IP 트래픽 메타데이터 로깅 | 보안 분석, 연결 문제 진단, 과도하게 제한/허용된 규칙 탐지에 사용한다. |
 | VPC Endpoint | VPC에서 AWS 서비스로 private access | S3/DynamoDB gateway endpoint와 PrivateLink 기반 interface endpoint를 구분해야 한다. |
+| S3 Gateway Endpoint policy | VPC에서 S3로 나가는 endpoint 경로의 접근 제어 정책 | 버킷 소유 계정의 S3 access point를 사용할 때 endpoint policy가 access point ARN과 underlying bucket ARN을 모두 허용해야 한다. |
 
 ## 3. 설계 시 고려사항
 
@@ -97,6 +98,7 @@ updated: 2026-05-19
 | 온프레미스와 빠른 구축 암호화 연결 | [[AWS VPN]] | 인터넷 기반 IPsec VPN, 빠른 구축, 백업 회선 | 일관된 대역폭/지연시간 요구에는 Direct Connect가 더 적합할 수 있다. |
 | 온프레미스와 전용선 기반 안정 연결 | [[AWS Direct Connect]] | 예측 가능한 성능, 대역폭, 전용 연결 | 암호화는 기본 제공이 아니므로 필요 시 VPN over DX/MACsec 등을 검토한다. |
 | AWS 서비스에 인터넷 없이 접근 | VPC Endpoint | S3/DynamoDB는 gateway endpoint, 많은 AWS 서비스는 interface endpoint | gateway endpoint는 PrivateLink가 아니다. |
+| 애플리케이션 VPC에서 S3 Access Point 접근 | S3 Gateway Endpoint + endpoint policy | 공용 인터넷 없이 특정 VPC에서만 S3 데이터 레이크 접근 | endpoint를 S3 버킷 쪽 “데이터 레이크 VPC”에 만든다는 선택지는 함정. S3는 VPC 안에 있지 않다. |
 
 ## 5. 비교 / 선택 기준
 
@@ -166,6 +168,7 @@ updated: 2026-05-19
 - **정답 단서**: private subnet, no internet exposure, S3, cost-effective/private access.
 - **선택할 구성**: S3 Gateway VPC Endpoint + route table 연결 + endpoint policy.
 - **오답 함정**: NAT Gateway를 통해 S3 public endpoint로 나가는 구성은 가능하지만 “인터넷 경로 없이/private access” 요구에는 덜 적합하다.
+- **Access Point 확장**: S3 Access Point를 VPC-only로 만들었다면, 해당 애플리케이션 VPC의 gateway endpoint policy가 access point와 underlying bucket 접근을 허용해야 한다.
 
 ### 패턴 2: 수십 개 VPC와 온프레미스 네트워크 중앙 연결
 

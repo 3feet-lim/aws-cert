@@ -9,7 +9,7 @@ priority: high
 aliases: ["S3", "Simple Storage Service"]
 tags: [aws, sap-c02, storage, object-storage]
 created: 2026-05-20
-updated: 2026-05-20
+updated: 2026-06-13
 ---
 
 # Amazon S3
@@ -47,6 +47,8 @@ updated: 2026-05-20
 | Event Notification | S3 이벤트를 Lambda/SQS/SNS/EventBridge로 전달 | 업로드 후 처리 파이프라인 |
 | Access Control | Block Public Access, bucket policy, IAM, access point, presigned URL | 퍼블릭 노출 방지와 임시 접근 제어 |
 | Encryption | SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, client-side | KMS 키 정책·cross-account 복제·감사 요구사항 |
+| S3 Access Point | 버킷에 연결된 이름 있는 네트워크 엔드포인트와 개별 정책 | 수백 개 앱/팀/계정이 같은 데이터 레이크를 쓸 때 앱별 최소 권한 정책을 분리한다. |
+| VPC-only Access Point | 생성 시 특정 VPC를 network origin으로 지정 | 공용 인터넷 접근 금지 요구는 access point를 VPC origin으로 만들고 S3 VPC endpoint 정책까지 맞춘다. |
 
 ## 3. 스토리지 클래스 선택 기준
 
@@ -75,6 +77,10 @@ updated: 2026-05-20
 - cross-account 접근은 IAM만이 아니라 bucket policy, KMS key policy, object ownership까지 함께 확인한다.
 - Object Lock은 WORM 요구사항의 핵심이며 versioning과 함께 설계한다.
 - CloudTrail data events, S3 server access logs, Storage Lens, Macie를 감사/분석에 사용한다.
+- 대규모 데이터 레이크 공유는 단일 거대한 bucket policy보다 **애플리케이션별 S3 Access Point policy**로 권한을 분리하는 패턴이 자주 나온다.
+- VPC-only access point는 생성 후 network origin을 바꿀 수 없으므로, 공용 인터넷 차단 요구가 있으면 처음부터 VPC origin으로 생성한다.
+- access point를 통한 접근만 허용하려면 bucket policy에서 `s3:DataAccessPointArn`, `s3:DataAccessPointAccount`, `s3:AccessPointNetworkOrigin` 같은 조건으로 직접 bucket 접근을 제한한다.
+- 여러 계정의 애플리케이션이 데이터 레이크 버킷을 사용할 때도 시험에서는 보통 버킷 소유 계정이 애플리케이션별 access point를 중앙 생성·통제하고, app 계정 IAM principal을 access point policy/bucket policy로 허용하는 패턴을 우선 본다.
 
 ## 6. 헷갈리는 포인트
 
@@ -85,11 +91,23 @@ updated: 2026-05-20
 - Versioning은 삭제 marker를 만들 수 있으므로 lifecycle로 noncurrent version 비용을 관리한다.
 - CRR은 기존 객체까지 자동 소급 복제하는 기능이 아니라, 설정 이후 객체가 기본 대상이다.
 - KMS 암호화 객체의 replication/cross-account 접근은 KMS 권한까지 맞아야 한다.
+- access point policy만 허용해도 underlying bucket policy가 허용하지 않으면 요청은 실패한다. 둘 다 허용되어야 한다.
+- VPC-only access point를 쓰려면 애플리케이션 VPC 쪽 S3 VPC endpoint policy도 access point ARN과 underlying bucket ARN 접근을 허용해야 한다.
 
-## 7. 암기 문장
+## 7. SAP-C02 시나리오 패턴
+
+### 패턴 1: 멀티 계정 애플리케이션의 S3 데이터 레이크 최소 권한 접근
+
+- **요구사항**: 여러 AWS 계정의 수백 개 애플리케이션이 같은 S3 데이터 레이크에 접근하지만 공용 인터넷 경로는 금지한다.
+- **정답 단서**: S3 access point, specific VPC, least privilege, multiple AWS accounts.
+- **선택할 구성**: 버킷 소유 계정에서 애플리케이션별 S3 Access Point를 생성해 버킷에 연결하고 VPC origin으로 제한 + 각 애플리케이션 VPC에 S3 Gateway VPC Endpoint 생성 + endpoint policy에서 access point와 bucket 접근 허용.
+- **오답 함정**: 데이터 레이크 “버킷이 있는 VPC”라는 표현은 틀리다. S3 버킷은 VPC 안에 있지 않으며, endpoint는 S3에 접근하는 애플리케이션 VPC에 만든다.
+
+## 8. 암기 문장
 
 - 객체·정적 콘텐츠·데이터 레이크·장기 보관·이벤트 처리는 우선 S3를 떠올린다.
 - 즉시 공유 파일 시스템은 EFS/FSx, 블록 디스크는 EBS, 아카이브 복원 시간은 Glacier 계층으로 구분한다.
+- 많은 앱/계정이 하나의 S3 데이터 레이크를 쓰면 버킷 소유 계정의 access point로 권한을 쪼개고, 인터넷 차단은 VPC-only access point + 애플리케이션 VPC의 S3 Gateway Endpoint로 묶는다.
 
 ## 참고 링크
 
@@ -97,4 +115,7 @@ updated: 2026-05-20
 - [Understanding and managing Amazon S3 storage classes](https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
 - [S3 Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
 - [S3 Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-overview.html)
+- [Managing access to shared datasets with access points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
+- [Creating access points restricted to a VPC](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-vpc.html)
+- [Configuring IAM policies for using access points](https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html)
 - [SAP-C02 Exam Guide](https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-professional-02/solutions-architect-professional-02.html)
