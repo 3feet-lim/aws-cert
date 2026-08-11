@@ -94,8 +94,7 @@
 
 ## 16. 🖥️ End User Computing
 
-- Amazon WorkSpaces
-- Amazon AppStream 2.0
+- 
 
 ---
 
