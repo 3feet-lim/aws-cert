@@ -37,23 +37,23 @@ updated: 2026-05-23
 
 ## 2. 주요 기능과 시험 포인트
 
-| 기능/개념 | 설명 | SAP-C02 포인트 |
-|---|---|---|
-| Interface endpoint | 소비자 VPC의 ENI 기반 endpoint | AWS 서비스/SaaS/endpoint service private 접근. |
-| Endpoint service | 제공자 서비스 노출 단위 | NLB/GWLB 뒤 서비스를 소비자에게 제공. |
-| Private DNS | 서비스 DNS를 private endpoint로 해석 | 앱 변경 최소화 단서. |
-| Endpoint policy | 지원 서비스 접근 제어 | S3 gateway endpoint policy와 구분. |
-| Security group | interface endpoint ENI 접근 제어 | 소비자 측 보안 경계. |
-| Overlapping CIDR support | 전체 라우팅이 아니므로 CIDR 중복 영향 감소 | M&A/파트너 VPC 단서. |
+| 기능/개념                    | 설명                            | SAP-C02 포인트                               |
+| ------------------------ | ----------------------------- | ----------------------------------------- |
+| Interface endpoint       | 소비자 VPC의 ENI 기반 endpoint      | AWS 서비스/SaaS/endpoint service private 접근. |
+| Endpoint service         | 제공자 서비스 노출 단위                 | NLB/GWLB 뒤 서비스를 소비자에게 제공.                 |
+| Private DNS              | 서비스 DNS를 private endpoint로 해석 | 앱 변경 최소화 단서.                              |
+| Endpoint policy          | 지원 서비스 접근 제어                  | S3 gateway endpoint policy와 구분.           |
+| Security group           | interface endpoint ENI 접근 제어  | 소비자 측 보안 경계.                              |
+| Overlapping CIDR support | 전체 라우팅이 아니므로 CIDR 중복 영향 감소    | M&A/파트너 VPC 단서.                           |
 
 ## 3. 비교 / 선택 기준
 
-| 비교 대상 | 차이점 | 선택 기준 | 오답 함정 |
-|---|---|---|---|
-| [[AWS PrivateLink]] | 특정 서비스 private 접근 | CIDR 중복 가능, provider/consumer 서비스 모델 | VPC 전체 양방향 통신 아님 |
-| [[AWS Transit Gateway]] | 네트워크 전체 라우팅 허브 | 다수 VPC/온프레미스 라우팅 | CIDR 중복 해결 못함 |
-| [[VPC Peering]] | 두 VPC 전체 private 라우팅 | 단순 1:1 전체 통신 | CIDR 중복/전이 라우팅 불가 |
-| Gateway VPC Endpoint | S3/DynamoDB route table endpoint | S3/DynamoDB private access | PrivateLink 기반 interface endpoint와 다름 |
+| 비교 대상                   | 차이점                              | 선택 기준                                | 오답 함정                                 |
+| ----------------------- | -------------------------------- | ------------------------------------ | ------------------------------------- |
+| [[AWS PrivateLink]]     | 특정 서비스 private 접근                | CIDR 중복 가능, provider/consumer 서비스 모델 | VPC 전체 양방향 통신 아님                      |
+| [[AWS Transit Gateway]] | 네트워크 전체 라우팅 허브                   | 다수 VPC/온프레미스 라우팅                     | CIDR 중복 해결 못함                         |
+| [[VPC Peering]]         | 두 VPC 전체 private 라우팅             | 단순 1:1 전체 통신                         | CIDR 중복/전이 라우팅 불가                     |
+| Gateway VPC Endpoint    | S3/DynamoDB route table endpoint | S3/DynamoDB private access           | PrivateLink 기반 interface endpoint와 다름 |
 
 
 ## 4. SAP-C02 시나리오 패턴

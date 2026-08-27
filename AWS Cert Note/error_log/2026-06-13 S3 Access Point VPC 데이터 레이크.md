@@ -23,13 +23,13 @@ tags: [aws, sap-c02, error-log, s3, vpc-endpoint, access-point, data-lake]
 
 ## 2. 정답과 오답
 
-| 구분 | 선택지/서비스 | 판단 |
-|---|---|---|
-| 정답 | c) 각 애플리케이션 VPC에 Amazon S3용 gateway endpoint를 생성하고 endpoint policy로 S3 access point 접근을 허용한 뒤 route table 지정 | S3로 가는 트래픽을 인터넷/NAT가 아니라 VPC endpoint 경로로 보내고, endpoint policy로 access point/bucket 접근을 제한한다. |
-| 정답 | a) S3 버킷 소유 계정에서 각 애플리케이션용 S3 access point를 생성하고, 각 access point를 해당 애플리케이션 VPC로 제한하며, bucket policy가 access point 경유 접근을 요구하도록 업데이트 | 버킷 소유 계정이 데이터 레이크 접근 지점을 중앙 관리하면서 앱별 access point policy로 최소 권한을 분리하고, VPC-only origin으로 공용 인터넷 접근을 차단한다. |
-| 오답 | d) 각 AWS 계정에서 각 애플리케이션 access point를 만들고 S3 버킷에 연결 | cross-account access point는 가능한 패턴이지만, 이 문제의 구현 단계는 데이터 레이크 버킷을 소유한 계정에서 access point를 중앙 생성·통제하는 것이다. 각 애플리케이션 계정에 AP 생성을 분산하면 bucket owner 중심의 통제 요구와 시험 의도에서 벗어난다. |
-| 오답 | b) S3용 interface endpoint 생성 + VPC gateway attachment 생성 | S3는 gateway endpoint가 기본 정답 패턴이다. `VPC gateway attachment`는 S3 endpoint 구성 단계가 아니며, 라우팅 테이블 연결이 핵심이다. |
-| 오답 | e) 데이터 레이크의 VPC에 S3 gateway endpoint 생성 | S3 버킷은 VPC 안에 존재하지 않는다. endpoint는 S3에 접근하는 **애플리케이션 VPC**마다 만들어야 한다. |
+| 구분  | 선택지/서비스                                                                                                                              | 판단                                                                                                                                                                    |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 정답  | c) 각 애플리케이션 VPC에 Amazon S3용 gateway endpoint를 생성하고 endpoint policy로 S3 access point 접근을 허용한 뒤 route table 지정                         | S3로 가는 트래픽을 인터넷/NAT가 아니라 VPC endpoint 경로로 보내고, endpoint policy로 access point/bucket 접근을 제한한다.                                                                         |
+| 정답  | a) S3 버킷 소유 계정에서 각 애플리케이션용 S3 access point를 생성하고, 각 access point를 해당 애플리케이션 VPC로 제한하며, bucket policy가 access point 경유 접근을 요구하도록 업데이트 | 버킷 소유 계정이 데이터 레이크 접근 지점을 중앙 관리하면서 앱별 access point policy로 최소 권한을 분리하고, VPC-only origin으로 공용 인터넷 접근을 차단한다.                                                             |
+| 오답  | d) 각 AWS 계정에서 각 애플리케이션 access point를 만들고 S3 버킷에 연결                                                                                   | cross-account access point는 가능한 패턴이지만, 이 문제의 구현 단계는 데이터 레이크 버킷을 소유한 계정에서 access point를 중앙 생성·통제하는 것이다. 각 애플리케이션 계정에 AP 생성을 분산하면 bucket owner 중심의 통제 요구와 시험 의도에서 벗어난다. |
+| 오답  | b) S3용 interface endpoint 생성 + VPC gateway attachment 생성                                                                             | S3는 gateway endpoint가 기본 정답 패턴이다. `VPC gateway attachment`는 S3 endpoint 구성 단계가 아니며, 라우팅 테이블 연결이 핵심이다.                                                                 |
+| 오답  | e) 데이터 레이크의 VPC에 S3 gateway endpoint 생성                                                                                              | S3 버킷은 VPC 안에 존재하지 않는다. endpoint는 S3에 접근하는 **애플리케이션 VPC**마다 만들어야 한다.                                                                                                  |
 
 ## 3. 왜 정답인가
 

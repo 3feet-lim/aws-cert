@@ -60,7 +60,7 @@ updated: 2026-05-26
 - 그림은 이 서비스가 속한 보안 의사결정 영역을 보여준다.
 - 시험에서는 개별 기능보다 **identity / encryption / detection / network protection / governance** 중 어느 문제인지 먼저 분류한다.
 
-## 5. SAP-C02 시나리오 패턴
+## 5. SAP-C02 시나리오 패턴x 
 
 ### 패턴 1: 기업 SSO로 AWS 접근
 
