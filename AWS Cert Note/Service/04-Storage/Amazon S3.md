@@ -37,18 +37,18 @@ updated: 2026-06-13
 
 ## 2. 주요 기능과 시험 포인트
 
-| 기능/개념 | 설명 | SAP-C02 포인트 |
-|---|---|---|
-| Storage Class | Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier 계열, Express One Zone | 접근 패턴/복원 시간/최소 보관 기간/가용성 요구사항으로 선택 |
-| Lifecycle | 객체를 시간·prefix·tag 기준으로 전환/만료 | 비용 최적화의 대표 단서 |
-| Versioning | 삭제/덮어쓰기 복구를 위해 버전을 유지 | 실수 삭제 대응, replication/Object Lock 전제와 함께 출제 |
-| Replication | 같은 리전(SRR) 또는 다른 리전(CRR)으로 객체 복제 | DR, 지연시간, 컴플라이언스, 계정 분리 요구사항 |
-| Object Lock | WORM 보존, retention/legal hold | 규정 준수·랜섬웨어 방어. Versioning 필요 |
-| Event Notification | S3 이벤트를 Lambda/SQS/SNS/EventBridge로 전달 | 업로드 후 처리 파이프라인 |
-| Access Control | Block Public Access, bucket policy, IAM, access point, presigned URL | 퍼블릭 노출 방지와 임시 접근 제어 |
-| Encryption | SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, client-side | KMS 키 정책·cross-account 복제·감사 요구사항 |
-| S3 Access Point | 버킷에 연결된 이름 있는 네트워크 엔드포인트와 개별 정책 | 수백 개 앱/팀/계정이 같은 데이터 레이크를 쓸 때 앱별 최소 권한 정책을 분리한다. |
-| VPC-only Access Point | 생성 시 특정 VPC를 network origin으로 지정 | 공용 인터넷 접근 금지 요구는 access point를 VPC origin으로 만들고 S3 VPC endpoint 정책까지 맞춘다. |
+| 기능/개념                 | 설명                                                                                    | SAP-C02 포인트                                                               |
+| --------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Storage Class         | Standard, Intelligent-Tiering, Standard-IA, One Zone-IA, Glacier 계열, Express One Zone | 접근 패턴/복원 시간/최소 보관 기간/가용성 요구사항으로 선택                                        |
+| Lifecycle             | 객체를 시간·prefix·tag 기준으로 전환/만료                                                          | 비용 최적화의 대표 단서                                                             |
+| Versioning            | 삭제/덮어쓰기 복구를 위해 버전을 유지                                                                 | 실수 삭제 대응, replication/Object Lock 전제와 함께 출제                               |
+| Replication           | 같은 리전(SRR) 또는 다른 리전(CRR)으로 객체 복제                                                      | DR, 지연시간, 컴플라이언스, 계정 분리 요구사항                                              |
+| Object Lock           | WORM 보존, retention/legal hold                                                         | 규정 준수·랜섬웨어 방어. Versioning 필요                                              |
+| Event Notification    | S3 이벤트를 Lambda/SQS/SNS/EventBridge로 전달                                                | 업로드 후 처리 파이프라인                                                            |
+| Access Control        | Block Public Access, bucket policy, IAM, access point, presigned URL                  | 퍼블릭 노출 방지와 임시 접근 제어                                                       |
+| Encryption            | SSE-S3, SSE-KMS, DSSE-KMS, SSE-C, client-side                                         | KMS 키 정책·cross-account 복제·감사 요구사항                                         |
+| S3 Access Point       | 버킷에 연결된 이름 있는 네트워크 엔드포인트와 개별 정책                                                       | 수백 개 앱/팀/계정이 같은 데이터 레이크를 쓸 때 앱별 최소 권한 정책을 분리한다.                           |
+| VPC-only Access Point | 생성 시 특정 VPC를 network origin으로 지정                                                      | 공용 인터넷 접근 금지 요구는 access point를 VPC origin으로 만들고 S3 VPC endpoint 정책까지 맞춘다. |
 
 ## 3. 스토리지 클래스 선택 기준
 
