@@ -19,13 +19,13 @@ updated: 2026-05-27
 
 ## 0. SAP-C02 시험 포커스
 
-| 항목 | 정리 |
-|---|---|
-| 출제 관점 | hybrid containers, external instances, on-premises/edge ECS, SSM agent, same ECS tooling |
-| 핵심 의사결정 | 온프레미스/엣지에 남아야 하는 컨테이너를 ECS 방식으로 중앙 운영하려면 ECS Anywhere를 고려한다. |
-| 대표 키워드 | external instance, on-premises, edge, hybrid, SSM agent, ECS agent, customer-managed infrastructure |
-| 자주 비교되는 서비스 | [[Amazon ECS]], [[Amazon EKS Anywhere]], [[AWS Systems Manager]], [[AWS Outposts]] |
-| 암기 우선순위 | Medium |
+| 항목          | 정리                                                                                                  |
+| ----------- | --------------------------------------------------------------------------------------------------- |
+| 출제 관점       | hybrid containers, external instances, on-premises/edge ECS, SSM agent, same ECS tooling            |
+| 핵심 의사결정     | 온프레미스/엣지에 남아야 하는 컨테이너를 ECS 방식으로 중앙 운영하려면 ECS Anywhere를 고려한다.                                        |
+| 대표 키워드      | external instance, on-premises, edge, hybrid, SSM agent, ECS agent, customer-managed infrastructure |
+| 자주 비교되는 서비스 | [[Amazon ECS]], [[Amazon EKS Anywhere]], [[AWS Systems Manager]], [[AWS Outposts]]                  |
+| 암기 우선순위     | Medium                                                                                              |
 
 ## 1. 핵심 개념
 
